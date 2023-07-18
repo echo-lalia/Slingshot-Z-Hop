@@ -1,10 +1,21 @@
 # Slingshot-Z-Hop
-A custom GCODE post processing script that adds a modified version of Z-Hop, which moves in a diagonal way instead of straight up and down.
+A custom GCODE post processing script that adds a modified version of Z-Hop, which moves in a diagonal way instead of straight up and down, and scales the height based on distance.
+![travel example](https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/c6561ae9-af2b-4998-b638-7f6cb7c39132)
+
+
+The point of this is to try to get most of the benefits of Z Hop, with less of the stringing and blobbing that it brings. This seems to work well for me, but I'm just one guy, and I can't say for sure whether or not this is as effective as I want it to be. 
+
+![explaination slingshot z hop](https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/c4399249-3901-4513-bb65-d30a6fbf8deb)
+
+
 
 # What the script does
 At it's core, this is a python script that takes a GCODE file, and scans over it line-by-line. It looks for travel moves (any x/y move without extrusion), reads them, and replaces them with a modified version. The modified version moves the Z axis up at the same time as the X/Y axis, and then lowers the nozzle again when overhead of the target. The GCODE you give to it should not have ZHop enabled already. 
 
 I'm a novice programmer, and I'd like my code to be easily readable by anyone who is starting out, so I have a comment on almost every line of the Python script, in case you'd like to look through it and see how it works, or modify it to your liking. 
+
+# Configuration
+This script takes a config.ini file to control your settings. Each setting has a comment explaining how it works, but basically, these let you control the height and speed of the Z hop. As well as how it scales. 
 
 # Running the Python script
 The Python script can be run on it's own the same way you'd run any Python script. You'll need to already have Python installed and in your PATH. Open a terminal in the directory with slinghot_z_hop.py and config.ini, and run it. This is what the run command looks like on my PC running Windows 10: 
@@ -17,10 +28,17 @@ You can also specify a specific GCODE file, like this:
 ```
 python slingshot_z_hop.py test.gcode
 ```
-It will overwrite the file you pass to it, with the new ZHop behaviour. Each new line has a comment on it, in case you'd like to inspect the result.
+It will overwrite the file you pass to it, with the new ZHop behaviour. Each new line has a comment on it, in case you'd like to inspect the resulting gcode.
 
 # Running the executable on Windows
 To run the executable on it's own, make sure both the slingshot_z_hop.exe and config.ini are in the same location. Place a file named 'input.gcode' into that folder, too, and simply double click the slingshot_z_hop.exe. It should edit your input.gcode file with the new ZHop feature. 
+
+# Compiling the .exe
+The EXE file is just the Python script, compiled using PyInstaller. If you'd like to compile it yourself, you'll need Python, ConfigParser, and PyInstaller installed on your system. Then you should be able to run 
+```
+pyinstaller slingshot_z_hop.py --onefile
+```
+to get your new executable. Remember that you still need the config file, though :)
 
 # Using with PrusaSlicer
 These instrucitons are for Windows 10, and may need to be modified for other operating systems. 
