@@ -1,16 +1,20 @@
 # Slingshot-Z-Hop
 A custom GCODE post processing script that adds a modified version of Z-Hop, which moves in a diagonal way instead of straight up and down, and scales the height based on distance.
-![travel example](https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/c6561ae9-af2b-4998-b638-7f6cb7c39132)
+![travel example](https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/fe136345-bf54-4e6a-b974-d0104325f05e)
+
 
 
 The point of this is to try to get most of the benefits of Z Hop, with less of the stringing and blobbing that it brings. This seems to work well for me, but I'm just one guy, and I can't say for sure whether or not this is as effective as I want it to be. 
 
-![explaination slingshot z hop](https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/c4399249-3901-4513-bb65-d30a6fbf8deb)
+![explaination slingshot z hop](https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/3cc71726-5f2f-4ee1-a030-07c392dbc8bd)
+
 
 
 
 # What the script does
-At it's core, this is a python script that takes a GCODE file, and scans over it line-by-line. It looks for travel moves (any x/y move without extrusion), reads them, and replaces them with a modified version. The modified version moves the Z axis up at the same time as the X/Y axis, and then lowers the nozzle again when overhead of the target. The GCODE you give to it should not have ZHop enabled already. 
+At it's core, this is a python script that takes a GCODE file, and scans over it line-by-line. It looks for travel moves (any x/y move without extrusion), reads them, and replaces them with a modified version. The modified version moves the Z axis up at the same time as the X/Y axis, and then lowers the nozzle again at some percentage of the way through the travel move (configurable). The code has been updated with logic that looks ahead for multiple travel moves in a row, and will raize the z axis slowly on each one, to the target height. 
+
+*The GCODE you give to it should not have ZHop enabled already.* 
 
 I'm a novice programmer, and I'd like my code to be easily readable by anyone who is starting out, so I have a comment on almost every line of the Python script, in case you'd like to look through it and see how it works, or modify it to your liking. 
 
