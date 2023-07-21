@@ -10,6 +10,14 @@ The point of this is to try to get most of the benefits of Z Hop, with less of t
 
 
 
+**Video Example:**
+
+https://github.com/echo-lalia/Slingshot-Z-Hop/assets/108598670/9e3e436b-4b8b-474b-87d5-266104593e76
+
+*(note that for the video, Z hop height has been raised much higher than normal, to make the motion more obvious)*
+
+
+
 
 # What the script does
 At it's core, this is a python script that takes a GCODE file, and scans over it line-by-line. It looks for travel moves (any x/y move without extrusion), reads them, and replaces them with a modified version. The modified version moves the Z axis up at the same time as the X/Y axis, and then lowers the nozzle again at some percentage of the way through the travel move (configurable). The code has been updated with logic that looks ahead for multiple travel moves in a row, and will raize the z axis slowly on each one, to the target height. 
