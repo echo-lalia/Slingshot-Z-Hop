@@ -50,6 +50,10 @@ The EXE file is just the Python script, compiled using PyInstaller. If you'd lik
 ```
 pyinstaller slingshot_z_hop.py --onefile
 ```
+or perhaps
+```
+python -m PyInstaller slingshot_z_hop.py --onefile
+```
 to get your new executable. Remember that you still need the config file, though :)
 
 # Using with PrusaSlicer
